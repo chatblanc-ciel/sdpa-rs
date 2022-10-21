@@ -5,4 +5,11 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+links = "spda_sys"
+build = "build.rs"
+
 [dependencies]
+
+[build-dependencies]
+bindgen = "0.61.0"
+cc = "1.0.73"
