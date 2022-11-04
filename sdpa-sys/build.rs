@@ -62,18 +62,20 @@ fn dmumps_cmake(vcpkg_path: Option<std::path::PathBuf>) -> Result<std::path::Pat
         .define("MKLROOT", env::var("ONEAPI_ROOT").unwrap() + "/mkl")
         .define(
             "MPIEXEC_EXECUTABLE",
-            env::var("ONEAPI_ROOT").unwrap() + "mpi/latest/bin",
+            env::var("I_MPI_ONEAPI_ROOT").unwrap() + "/bin",
         )
-        .define("MPI_HOME", env::var("ONEAPI_ROOT").unwrap() + "/mpi")
-        .define("I_MPI_ROOT", env::var("ONEAPI_ROOT").unwrap() + "/mpi")
+        .define("MPI_HOME", env::var("I_MPI_ONEAPI_ROOT").unwrap())
+        .define("I_MPI_ROOT", env::var("I_MPI_ONEAPI_ROOT").unwrap())
         //.define("BLA_VENDOR", "Intel10_64lp")
+        .define("parallel", "false")
         /*        .define("BLA_VENDOR", "OpenBLAS")
         .define(
             "CMAKE_PREFIX_PATH",
             format!("{}", blas_path.clone().unwrap().display()),
         )*/
         //.define("NOFORTRAN", "0")
-        .define("CMAKE_FIND_DEBUG_MODE", "1")
+        //.very_verbose(true)
+        //.define("CMAKE_FIND_DEBUG_MODE", "1")
         .build();
     println!("cargo:rustc-link-search=native={}", dst.display());
     Ok(dst)
